@@ -3,7 +3,9 @@ package com.pm.ecommerceapiintegration.controllers;
 
 import com.pm.ecommerceapiintegration.dto.ProductDto;
 import com.pm.ecommerceapiintegration.services.IProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,7 +14,8 @@ public class ProductController {
 
     private final IProductService productService;
 
-    public ProductController(IProductService productService) {
+
+    public ProductController(@Qualifier("productService") IProductService productService) {
         this.productService = productService;
     }
 

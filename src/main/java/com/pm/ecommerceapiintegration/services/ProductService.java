@@ -5,9 +5,11 @@ import com.pm.ecommerceapiintegration.dto.ProductDto;
 import com.pm.ecommerceapiintegration.entity.Product;
 import com.pm.ecommerceapiintegration.mapper.ProductMapper;
 import com.pm.ecommerceapiintegration.repository.ProductRepository;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
+@Component("productService")
 public class ProductService implements IProductService {
 
     private final ProductRepository productRepository;

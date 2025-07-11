@@ -8,5 +8,7 @@ import java.util.List;
 
     List<CategoryDTO> getAllCategories() throws IOException;
 
+    CategoryDTO createCategory(CategoryDTO categoryDTO);
+
 
 }
