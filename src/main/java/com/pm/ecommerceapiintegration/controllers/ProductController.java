@@ -4,10 +4,7 @@ package com.pm.ecommerceapiintegration.controllers;
 import com.pm.ecommerceapiintegration.dto.ProductDto;
 import com.pm.ecommerceapiintegration.services.IProductService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/products")
@@ -25,5 +22,10 @@ public class ProductController {
         ProductDto result= this.productService.getProductById(id);
 
       return ResponseEntity.ok().body(result);
+    }
+
+    @PostMapping
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto dto)  {
+        return ResponseEntity.ok(productService.createProduct(dto));
     }
 }
