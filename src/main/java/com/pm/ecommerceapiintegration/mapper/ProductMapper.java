@@ -1,6 +1,7 @@
 package com.pm.ecommerceapiintegration.mapper;
 
 import com.pm.ecommerceapiintegration.dto.ProductDto;
+import com.pm.ecommerceapiintegration.dto.ProductWithCategoryDTO;
 import com.pm.ecommerceapiintegration.entity.Category;
 import com.pm.ecommerceapiintegration.entity.Product;
 
@@ -19,7 +20,6 @@ public class ProductMapper {
                 .model(product.getModel())
                 .title(product.getTitle())
                 .categoryId(product.getCategory().getId())
-              //  .category(product.getCategory())
                 .brand(product.getBrand())
                 .popular(product.isPopular())
                 .build();
@@ -41,5 +41,24 @@ public class ProductMapper {
                 .brand(dto.getBrand())
                 .popular(dto.isPopular())
                 .build();
+    }
+
+    public static ProductWithCategoryDTO toProductWithCategoryDTO(Product product)
+    {
+        return ProductWithCategoryDTO.builder()
+                .id(product.getId())
+                .image(product.getImage())
+                .color(product.getColor())
+                .price(product.getPrice())
+                .description(product.getDescription())
+                .discount(product.getDiscount())
+                .model(product.getModel())
+                .title(product.getTitle())
+                .categoryId(product.getCategory().getId())
+                .brand(product.getBrand())
+                .popular(product.isPopular())
+                .category(CategoryMapper.toCategoryDTO(product.getCategory()))
+                .build();
+
     }
 }

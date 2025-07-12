@@ -1,8 +1,11 @@
 package com.pm.ecommerceapiintegration.services;
 
 import com.pm.ecommerceapiintegration.dto.CategoryDTO;
+import com.pm.ecommerceapiintegration.dto.CategoryWithProductDTO;
+import com.pm.ecommerceapiintegration.dto.ProductDto;
 import com.pm.ecommerceapiintegration.entity.Category;
 import com.pm.ecommerceapiintegration.mapper.CategoryMapper;
+import com.pm.ecommerceapiintegration.mapper.ProductMapper;
 import com.pm.ecommerceapiintegration.repository.CategoryRepository;
 import org.springframework.stereotype.Component;
 
@@ -46,6 +49,26 @@ public class CategoryService implements ICategoryService{
 //        Category category=categoryRepository.findByName(name)
 //        .orElseThrow(()->new Exception("Category not found" + name));
 //        return CategoryMapper.toCategoryDTO(category);
+    }
+
+    @Override
+    public CategoryWithProductDTO getCategoryWithProducts(long id) throws Exception {
+
+        Category category=categoryRepository.findById(id)
+                .orElseThrow(() -> new Exception("Category not found with id: " + id));
+
+        List<ProductDto> products =category.getProducts()
+                .stream()
+                .map(product-> ProductMapper.toDto(product))
+                .collect(Collectors.toList());
+
+        return CategoryWithProductDTO.builder()
+                .id(category.getId())
+                .name(category.getName())
+                .products(products)
+                .build();
+
+
     }
 
 

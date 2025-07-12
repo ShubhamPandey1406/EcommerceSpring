@@ -2,6 +2,7 @@ package com.pm.ecommerceapiintegration.controllers;
 
 
 import com.pm.ecommerceapiintegration.dto.ProductDto;
+import com.pm.ecommerceapiintegration.dto.ProductWithCategoryDTO;
 import com.pm.ecommerceapiintegration.services.IProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +40,11 @@ public class ProductController {
 
         List<ProductDto> products=productService.getProductByMatch(keyword);
         return ResponseEntity.ok().body(products);
+    }
+    @GetMapping("/{id}/details")
+    public ResponseEntity<ProductWithCategoryDTO> getProductWithCategory(@PathVariable Long id) throws Exception {
+
+        ProductWithCategoryDTO dto=productService.getProductWithCategory(id);
+        return ResponseEntity.ok(dto);
     }
 }

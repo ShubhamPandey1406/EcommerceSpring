@@ -2,6 +2,7 @@ package com.pm.ecommerceapiintegration.services;
 
 import com.pm.ecommerceapiintegration.APIgateway.ICategoryGateway;
 import com.pm.ecommerceapiintegration.dto.CategoryDTO;
+import com.pm.ecommerceapiintegration.dto.CategoryWithProductDTO;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,11 @@ public class FakeCategoryService implements ICategoryService{
 
     @Override
     public CategoryDTO getCategoryByName(String categoryName) {
+        return null;
+    }
+
+    @Override
+    public CategoryWithProductDTO getCategoryWithProducts(long id) throws Exception {
         return null;
     }
 

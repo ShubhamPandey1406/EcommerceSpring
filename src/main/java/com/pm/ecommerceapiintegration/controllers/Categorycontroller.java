@@ -1,6 +1,7 @@
 package com.pm.ecommerceapiintegration.controllers;
 
 import com.pm.ecommerceapiintegration.dto.CategoryDTO;
+import com.pm.ecommerceapiintegration.dto.CategoryWithProductDTO;
 import com.pm.ecommerceapiintegration.services.FakeCategoryService;
 import com.pm.ecommerceapiintegration.services.ICategoryService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,6 +41,12 @@ public class Categorycontroller {
     public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO) throws IOException {
         CategoryDTO createdCategory = categoryService.createCategory(categoryDTO);
         return ResponseEntity.ok(createdCategory);
+    }
+
+    @GetMapping("/{id}/products")
+    public ResponseEntity<CategoryWithProductDTO> getAllProductsOfCategory(@PathVariable Long id) throws Exception {
+        CategoryWithProductDTO dtos=categoryService.getCategoryWithProducts(id);
+        return ResponseEntity.ok(dtos);
     }
 
 //    @GetMapping("/{name}")

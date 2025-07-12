@@ -1,6 +1,7 @@
 package com.pm.ecommerceapiintegration.mapper;
 
 import com.pm.ecommerceapiintegration.dto.CategoryDTO;
+import com.pm.ecommerceapiintegration.dto.CategoryWithProductDTO;
 import com.pm.ecommerceapiintegration.entity.Category;
 
 public class CategoryMapper {
@@ -15,4 +16,6 @@ public class CategoryMapper {
     public static Category toCategory(CategoryDTO categoryDTO) {
         return Category.builder().name(categoryDTO.getName()).build();
     }
+
+
 }
