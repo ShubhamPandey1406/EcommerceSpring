@@ -1,6 +1,7 @@
 package com.pm.ecommerceapiintegration.mapper;
 
 import com.pm.ecommerceapiintegration.dto.ProductDto;
+import com.pm.ecommerceapiintegration.entity.Category;
 import com.pm.ecommerceapiintegration.entity.Product;
 
 public class ProductMapper {
@@ -17,14 +18,15 @@ public class ProductMapper {
                 .discount(product.getDiscount())
                 .model(product.getModel())
                 .title(product.getTitle())
-                .category(product.getCategory())
+                .categoryId(product.getCategory().getId())
+              //  .category(product.getCategory())
                 .brand(product.getBrand())
                 .popular(product.isPopular())
                 .build();
     }
 
 
-    public static Product toEntity(ProductDto dto)
+    public static Product toEntity(ProductDto dto, Category category)
     {
         return Product.builder()
                 .id(dto.getId())
@@ -35,7 +37,7 @@ public class ProductMapper {
                 .discount(dto.getDiscount())
                 .model(dto.getModel())
                 .title(dto.getTitle())
-                .category(dto.getCategory())
+               .category(category)
                 .brand(dto.getBrand())
                 .popular(dto.isPopular())
                 .build();

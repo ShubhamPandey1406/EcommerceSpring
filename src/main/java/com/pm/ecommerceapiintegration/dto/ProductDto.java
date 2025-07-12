@@ -16,7 +16,7 @@ public class ProductDto{
 	private String model;
 	private long id;
 	private String title;
-	private String category;
+	private long categoryId;
 	private String brand;
 	private boolean popular;
 }

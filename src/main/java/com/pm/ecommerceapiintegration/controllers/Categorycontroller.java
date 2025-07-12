@@ -21,10 +21,18 @@ public class Categorycontroller {
     }
 
     @GetMapping
-   public ResponseEntity<List<CategoryDTO>>getAllCategories() throws IOException {
+   public ResponseEntity<?>getAllCategories(@RequestParam(required=false) String name) throws Exception {
 
-        List<CategoryDTO> categories = categoryService.getAllCategories();
-        return ResponseEntity.ok(categories);
+       if(name!=null && !name.isBlank()) {
+           CategoryDTO dto=categoryService.getCategoryByName(name);
+           return ResponseEntity.ok(dto);
+       }
+       else {
+
+
+           List<CategoryDTO> categories = categoryService.getAllCategories();
+           return ResponseEntity.ok(categories);
+       }
 
     }
 
@@ -33,6 +41,13 @@ public class Categorycontroller {
         CategoryDTO createdCategory = categoryService.createCategory(categoryDTO);
         return ResponseEntity.ok(createdCategory);
     }
+
+//    @GetMapping("/{name}")
+//    public ResponseEntity<CategoryDTO> getCategory(@PathVariable String name) throws Exception {
+//        CategoryDTO dto=categoryService.getCategoryByName(name);
+//        return ResponseEntity.ok(dto);
+//
+//    }
 
 
 

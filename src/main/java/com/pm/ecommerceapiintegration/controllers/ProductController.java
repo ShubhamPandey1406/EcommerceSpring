@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/products")
 public class ProductController {
@@ -28,7 +30,14 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto dto)  {
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto dto) throws Exception {
         return ResponseEntity.ok(productService.createProduct(dto));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductDto>> getAllProductsBymatch(@RequestParam String keyword) throws Exception {
+
+        List<ProductDto> products=productService.getProductByMatch(keyword);
+        return ResponseEntity.ok().body(products);
     }
 }

@@ -30,5 +30,10 @@ public class FakeCategoryService implements ICategoryService{
         return null;
     }
 
+    @Override
+    public CategoryDTO getCategoryByName(String categoryName) {
+        return null;
+    }
+
 
 }

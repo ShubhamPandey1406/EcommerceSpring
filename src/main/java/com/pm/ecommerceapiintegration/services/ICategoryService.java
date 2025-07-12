@@ -10,5 +10,7 @@ import java.util.List;
 
     CategoryDTO createCategory(CategoryDTO categoryDTO);
 
+    CategoryDTO getCategoryByName(String categoryName) throws Exception;
+
 
 }
