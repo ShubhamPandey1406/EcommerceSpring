@@ -3,8 +3,10 @@ package com.pm.ecommerceapiintegration.controllers;
 
 import com.pm.ecommerceapiintegration.dto.ProductDto;
 import com.pm.ecommerceapiintegration.dto.ProductWithCategoryDTO;
+import com.pm.ecommerceapiintegration.exception.productNotFoundException;
 import com.pm.ecommerceapiintegration.services.IProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -46,5 +48,10 @@ public class ProductController {
 
         ProductWithCategoryDTO dto=productService.getProductWithCategory(id);
         return ResponseEntity.ok(dto);
+    }
+
+    @ExceptionHandler(productNotFoundException.class)
+    public ResponseEntity<String> handleProductNotFoundException(productNotFoundException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The new message is " + ex.getMessage());
     }
 }

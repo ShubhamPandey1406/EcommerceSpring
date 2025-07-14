@@ -5,6 +5,7 @@ import com.pm.ecommerceapiintegration.dto.ProductDto;
 import com.pm.ecommerceapiintegration.dto.ProductWithCategoryDTO;
 import com.pm.ecommerceapiintegration.entity.Category;
 import com.pm.ecommerceapiintegration.entity.Product;
+import com.pm.ecommerceapiintegration.exception.productNotFoundException;
 import com.pm.ecommerceapiintegration.mapper.ProductMapper;
 import com.pm.ecommerceapiintegration.repository.CategoryRepository;
 import com.pm.ecommerceapiintegration.repository.ProductRepository;
@@ -31,7 +32,7 @@ public class ProductService implements IProductService {
     public ProductDto getProductById(Long id) throws Exception {
       return  productRepository.findById(id)
                 .map(ProductMapper::toDto)
-                .orElseThrow(() -> new Exception("Product not found"));
+                .orElseThrow(() -> new productNotFoundException("Product with id" +id+  " not found"));
     }
 
     @Override
