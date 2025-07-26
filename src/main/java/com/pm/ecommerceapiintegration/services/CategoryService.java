@@ -35,8 +35,8 @@ public class CategoryService implements ICategoryService{
     @Override
     public CategoryDTO createCategory(CategoryDTO categoryDTO) {
         Category category = CategoryMapper.toCategory(categoryDTO);
-        categoryRepository.save(category);
-        return CategoryMapper.toCategoryDTO(category);
+       Category saved= categoryRepository.save(category);
+        return CategoryMapper.toCategoryDTO(saved);
     }
 
     @Override
