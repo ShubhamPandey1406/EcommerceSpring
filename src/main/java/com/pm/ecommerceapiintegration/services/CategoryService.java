@@ -34,6 +34,11 @@ public class CategoryService implements ICategoryService{
 
     @Override
     public CategoryDTO createCategory(CategoryDTO categoryDTO) {
+
+        //Check should be applied
+        if (categoryDTO == null || categoryDTO.getName() == null || categoryDTO.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("Category name cannot be null or empty");
+        }
         Category category = CategoryMapper.toCategory(categoryDTO);
        Category saved= categoryRepository.save(category);
         return CategoryMapper.toCategoryDTO(saved);

@@ -22,7 +22,7 @@ public class Categorycontroller {
     }
 
     @GetMapping
-   public ResponseEntity<?>getAllCategories(@RequestParam(required=false) String name) throws Exception {
+   public ResponseEntity<Object>getAllCategories(@RequestParam(required=false) String name) throws Exception {
 
        if(name!=null && !name.isBlank()) {
            CategoryDTO dto=categoryService.getCategoryByName(name);

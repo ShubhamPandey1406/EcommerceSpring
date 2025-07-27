@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -76,10 +77,73 @@ public class CategoryServiceTest {
 
 
         // 3. Set up the mock behavior
+        //---------------------------------------//
+
+        // HERE we use when() because:
+        // 1. Input is valid, so validation passes
+        // 2. Service will call repository.save()
+        // 3. We need to control what save() returns
         when(categoryRepository.save(any(Category.class))).thenReturn(category);
         CategoryDTO result=categoryService.createCategory(categoryDTO);
 
         assertEquals("tv",result.getName());
         assertEquals(1L, result.getId());
+    }
+
+    @Test
+    @DisplayName("should throw exception when category name is null")
+    void createCategory_shouldThrowException_whenNameisNull()
+    {
+        CategoryDTO categoryDTO=CategoryDTO.builder().name(null).build();
+        // NO when() here because:
+        // 1. We want the service to validate the input FIRST
+        // 2. The exception should be thrown BEFORE calling the repository
+        // 3. We're testing the service's validation logic, not the repository
+        assertThrows(IllegalArgumentException.class,()->categoryService.createCategory(categoryDTO));
+    }
+
+    @Test
+    @DisplayName("should return empty list when no category is found")
+    void getAllCategories_shouldReturnEmptyList_whenNoCategoriesFound() throws IOException {
+
+       when(categoryRepository.findAll()).thenReturn(new ArrayList<>());
+
+       List<CategoryDTO> result=categoryService.getAllCategories();
+
+       assertTrue(result.isEmpty());
+
+       verify(categoryRepository,times(1)).findAll();
+    }
+
+    @Test
+    @DisplayName("should return category when name is given")
+    void getCategoryByName_shouldReturnCategory() throws Exception {
+        //Arrange
+        String categoryName="electronics";
+
+        Category category=Category.builder()
+                .name(categoryName)
+                .build();
+
+        category.setId(1L);
+
+        when(categoryRepository.findByName(categoryName)).thenReturn(Optional.of(category));
+
+        //Act
+        CategoryDTO result = categoryService.getCategoryByName(categoryName);
+
+        //Assert
+
+        assertNotNull(result);
+        assertEquals(categoryName,result.getName());
+        assertEquals(1L,result.getId());
+
+        //Verify
+
+        verify(categoryRepository,times(1)).findByName(categoryName);
+
+
+
+
     }
 }
