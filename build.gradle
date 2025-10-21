@@ -39,12 +39,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.10.0'
     runtimeOnly 'com.mysql:mysql-connector-j:8.3.0'
     implementation'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:4.3.0'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'io.micrometer:micrometer-registry-prometheus'
-    testImplementation "org.mockito:mockito-core:5.14.2"   // use latest
-    testImplementation "org.mockito:mockito-inline:5.14.2"
-
-
 }
 
 tasks.named('test') {
